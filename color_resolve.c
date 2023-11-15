@@ -13,14 +13,14 @@
 const size_t cote = 20;
 const size_t NUM_PIXEL_TO_PRINT = 400U;
 
-int getImageData(image_t* img, unsigned char* data){
+int getImageData(image_t* img, unsigned char* data){ // REVOIR TAILLE DES TABLEAUX, PROBLEME AVEC CA SUREMENT
 	img->array=malloc(img->width*sizeof(pixel_t*));
 	for(int i=0; i<img->width; i++){
 		img->array[i]=malloc(img->height*sizeof(pixel_t));
 	}
 	int counter=0;
 	for(int i=1; i<=(img->height); i++){
-		for(int j=1 ; j<(img->width*img->channels); j+=3){
+		for(int j=1 ; j<=(img->width*img->channels); j+=3){
 			img->array[i-1][j-1].b=data[counter];
 			img->array[i-1][j-1].g=data[counter+1];
 			img->array[i-1][j-1].r=data[counter+2];
