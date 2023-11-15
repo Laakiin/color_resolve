@@ -21,9 +21,9 @@ int getImageData(image_t* img, unsigned char* data){
 	int counter=0;
 	for(int i=1; i<=(img->height); i++){
 		for(int j=1 ; j<(img->width*img->channels); j+=3){
-			img->array[i][j].b=data[counter];
-			img->array[i][j].g=data[counter+1];
-			img->array[i][j].r=data[counter+2];
+			img->array[i-1][j-1].b=data[counter];
+			img->array[i-1][j-1].g=data[counter+1];
+			img->array[i-1][j-1].r=data[counter+2];
 			counter+=3;
 		}
 	}
@@ -42,7 +42,7 @@ int getImage(image_t* img,char* image_dir){
 int main(void) {
 
 	image_t test;
-	getImageInfos(&test, "red.png");
+	getImage(&test, "red.png");
 
 	/*
 	int w,h,c;
