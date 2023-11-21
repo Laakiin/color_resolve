@@ -16,16 +16,22 @@
 #include "stb_image.h"
 
 typedef struct{
+	unsigned char h;
+	unsigned char s;
+	unsigned char v;
+}pixelhsv_t;
+
+typedef struct{
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
-}pixel_t;
+}pixelrgb_t;
 
 typedef struct{
 	int height;
 	int width;
 	int channels;
-	pixel_t** array;
+	pixelrgb_t** array;
 }image_t;
 
 //get height width and number of channels of an image, store it in img
