@@ -11,43 +11,53 @@
 #include "color_resolve.h"
 
 
-float max(float a, float b, float c) {
-   return ((a > b)? (a > c ? a : c) : (b > c ? b : c));
-}
-float min(float a, float b, float c) {
-   return ((a < b)? (a < c ? a : c) : (b < c ? b : c));
-}
-pixelhsv_t rgb_to_hsv(float r, float g, float b) {
-	pixelhsv_t pixel;
-   // R, G, B values are divided by 255
-   // to change the range from 0..255 to 0..1:
-   float h, s, v;
-   r /= 255.0;
-   g /= 255.0;
-   b /= 255.0;
-   float cmax = max(r, g, b); // maximum of r, g, b
-   float cmin = min(r, g, b); // minimum of r, g, b
-   float diff = cmax-cmin; // diff of cmax and cmin.
-   if (cmax == cmin)
-      h = 0;
-   else if (cmax == r)
-      h = fmod((60 * ((g - b) / diff) + 360), 360.0);
-   else if (cmax == g)
-      h = fmod((60 * ((b - r) / diff) + 120), 360.0);
-   else if (cmax == b)
-      h = fmod((60 * ((r - g) / diff) + 240), 360.0);
-   // if cmax equal zero
-      if (cmax == 0)
-         s = 0;
-      else
-         s = (diff / cmax) * 100;
-   // compute v
-   v = cmax * 100;
-   //printf("h s v=(%f, %f, %f)", h, s, v );
-   pixel.h=(char)h;
-   pixel.s=(char)s;
-   pixel.v=(char)v;
-   return pixel;
+#define MIN(a,b) ((a)<(b)?(a):(b))
+#define MAX(a,b) ((a)>(b)?(a):(b))
+/*
+ * Converts an RGB color value to HSL. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns HSL in the set [0, 1].
+ */
+pixelhsl_t rgb2hsl(float r, float g, float b) {
+
+  pixelhsl_t result;
+
+  r /= 255;
+  g /= 255;
+  b /= 255;
+
+  float h,s,l;
+
+  float max = MAX(MAX(r,g),b);
+  float min = MIN(MIN(r,g),b);
+
+  h = s = l = (max + min) / 2;
+
+  if (max == min) {
+    h = s = 0; // achromatic
+  }
+  else {
+    float d = max - min;
+    s = (l > 0.5) ? d / (2 - max - min) : d / (max + min);
+
+    if (max == r) {
+      h = (g - b) / d + (g < b ? 6 : 0);
+    }
+    else if (max == g) {
+      h = (b - r) / d + 2;
+    }
+    else if (max == b) {
+      h = (r - g) / d + 4;
+    }
+
+    h /= 6;
+  }
+
+  result.h=(unsigned char)255*h;
+  result.s=(unsigned char)255*s;
+  result.l=(unsigned char)255*l;
+  return result;
 }
 
 int getImageData(image_t* img, unsigned char* data){ // REVOIR TAILLE DES TABLEAUX, PROBLEME AVEC CA SUREMENT
@@ -93,11 +103,11 @@ void printImageArray(image_t* src, char mode){
 		}
 	}
 	else if(mode==3){
-		pixelhsv_t pix;
+		pixelhsl_t pix;
 			for(int i=0; i<src->height; i++){
 				for(int j=0; j<src->width; j++){
-					pix=rgb_to_hsv((float)src->array[i][j].r,(float)src->array[i][j].g,(float)src->array[i][j].b);
-					printf("[%03d %03d %03d]",pix.h,pix.s,pix.v);
+					pix=rgb2hsl((float)src->array[i][j].r,(float)src->array[i][j].g,(float)src->array[i][j].b);
+					printf("[%03d %03d %03d]",pix.h,pix.s,pix.l);
 				}
 				printf("\n");
 			}
@@ -110,8 +120,8 @@ void printImageArray(image_t* src, char mode){
 int main(void) {
 
 	image_t test;
-	getImage(&test, "5_5_test.png");
-	printImageArray(&test,3);
+	getImage(&test, "palette.png");
+	printImageArray(&test,2);
 
 	return EXIT_SUCCESS;
 }

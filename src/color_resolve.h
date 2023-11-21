@@ -18,8 +18,8 @@
 typedef struct{
 	unsigned char h;
 	unsigned char s;
-	unsigned char v;
-}pixelhsv_t;
+	unsigned char l;
+}pixelhsl_t;
 
 typedef struct{
 	unsigned char r;
