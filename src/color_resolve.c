@@ -17,7 +17,7 @@
  * Converts an RGB color value to HSL. Conversion formula
  * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
  * Assumes r, g, and b are contained in the set [0, 255] and
- * returns HSL in the set [0, 1].
+ * returns HSL in the set [0, 255].
  */
 pixelhsl_t rgb2hsl(float r, float g, float b) {
 
@@ -60,7 +60,7 @@ pixelhsl_t rgb2hsl(float r, float g, float b) {
   return result;
 }
 
-int getImageData(image_t* img, unsigned char* data){ // REVOIR TAILLE DES TABLEAUX, PROBLEME AVEC CA SUREMENT
+int getImageData(image_t* img, unsigned char* data){
 	img->array=malloc(img->width*sizeof(pixelrgb_t*));
 	for(int i=0; i<img->width; i++){
 		img->array[i]=malloc(img->height*sizeof(pixelrgb_t));
