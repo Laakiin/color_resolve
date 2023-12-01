@@ -39,4 +39,10 @@ int getImage(image_t* img,char* image_dir);
 //get image pixels, stored in pixel_t 2D array
 int getImageData(image_t* img, unsigned char* data);
 
+//print image data following 3 modes:
+//   -Mode 1: print rgb codes of each pixel
+//   -Mode 2: print each pixel as a ´#´ colored with the color of the pixel
+//   -Mode 3: print hsl codes of each pixel
+void printImage(image_t img, char mode);
+
 #endif /* COLOR_RESOLVE_H_ */
