@@ -230,7 +230,7 @@ int main(void){
 	}
 
 	for(int i=0; i<21; i++){
-		printf("%d,%d,%d,\n",meansrgb[i].r,meansrgb[i].g,meansrgb[i].b);
+		printf("%d,%d,%d,%d\n",meansrgb[i].r,meansrgb[i].g,meansrgb[i].b,(i+1));
 	}
 
 	return EXIT_SUCCESS;
