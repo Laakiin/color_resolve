@@ -1,30 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+#include "nbclib.h"
 
-#define MAX_COLORS 1000
-
-typedef struct {
-    int r;
-    int g;
-    int b;
-    char color_name[50];
-} color_t;
-
-typedef struct {
-    char color_name[50];
-    char color_component;
-    double esperence;
-    double variance;
-    double Pcolor;
-} colorStat_t;
-
-
-
-void sortByColorName(color_t *colors, int numColors, color_t **JAUNES, color_t **BLEUS, color_t **ROUGES,color_t **VERTS, color_t **BLANCS, color_t **ORANGES);
-void esperence_color(color_t *colors, int numColors, double *esperence_r, double *esperence_g, double *esperence_b);
-void variance_color(color_t *colors, int numColors, double *variance_r, double *variance_g, double *variance_b);
 
 
 void sortByColorName(color_t *colors, int numColors, color_t **JAUNES, color_t **BLEUS, color_t **ROUGES,
@@ -308,7 +283,6 @@ void test(color_t *colors, int numColors, colorStat_t *colorStats) {
 int main() {
     int numBaseColors, numSampleColors;
     int numSample = 4848;
-    int numErrors;
     color_t *base = openCSV("OK-TOUT3.csv", &numBaseColors);
     colorStat_t *colorStats = calculateColorStats(base, numBaseColors);
 
