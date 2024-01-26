@@ -216,7 +216,7 @@ void DFS(image_t *img, image_t *mask, int i, int j, int regionLabel, int **visit
 int main(void){
 
 	image_t img;
-	getImage(&img, "aled.jpg");
+	getImage(&img, "out.jpg");
 
 	image_t mask;
 	getImage(&mask, "mask.jpg");
@@ -230,7 +230,7 @@ int main(void){
 	}
 
 	for(int i=0; i<21; i++){
-		printf("zone %d : rgb:(%d,%d,%d) | hsl:(%d,%d,%d)\n",(i+1),meansrgb[i].r,meansrgb[i].g,meansrgb[i].b,meanshsl[i].h,meanshsl[i].s,meanshsl[i].l);
+		printf("%d,%d,%d,\n",meansrgb[i].r,meansrgb[i].g,meansrgb[i].b);
 	}
 
 	return EXIT_SUCCESS;

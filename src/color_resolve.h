@@ -130,7 +130,7 @@ pixelrgb_t calculateAverageColor(image_t *img, bounding_box_t box);
  * @param mask - mask applied to the image
  * @param output - Array in which each color mean is stored
  */
-void processRegions(image_t* img, image_t* mask, pixelrgb_t* output)
+void processRegions(image_t* img, image_t* mask, pixelrgb_t* output);
 
 
 
