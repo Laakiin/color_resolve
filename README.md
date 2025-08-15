@@ -26,7 +26,4 @@ convert src.jpg -crop 327x327+150+80 out.jpg
 
 ⚠️ **Important** : Si l'image n'est pas recadrée, elle ne correspondra pas au masque utilisé par le programme, et le traitement échouera.
 
----
 
-### Liens utiles
-- [Dépôt GitHub](https://github.com/Laakiin/color_resolve)
