@@ -28,17 +28,5 @@ convert src.jpg -crop 327x327+150+80 out.jpg
 
 ---
 
-## Installation
-
-*(À compléter selon les instructions du projet, si disponibles.)*
-
----
-
-## Contribution
-
-Vous souhaitez contribuer ? N'hésitez pas à ouvrir une *issue* ou une *pull request* sur le dépôt GitHub !
-
----
-
 ### Liens utiles
 - [Dépôt GitHub](https://github.com/Laakiin/color_resolve)
